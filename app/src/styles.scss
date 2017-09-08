@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+.table-container {
+  width: 100%;
+  overflow-y: auto;
+
+  .table {
+    th,
+    td {
+      white-space: nowrap;
+    }
+  }
+}
+
+.profile-image {
+  width: 32px;
+  height: 32px;
+}
