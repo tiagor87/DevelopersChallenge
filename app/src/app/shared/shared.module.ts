@@ -1,3 +1,4 @@
+import { AuthenticationService } from './authentication.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserService } from './user.service';
@@ -8,6 +9,12 @@ import { RoundService } from './round.service';
 @NgModule({
   imports: [CommonModule],
   declarations: [],
-  providers: [UserService, TeamService, MatchService, RoundService]
+  providers: [
+    UserService,
+    TeamService,
+    MatchService,
+    RoundService,
+    AuthenticationService
+  ]
 })
 export class SharedModule {}

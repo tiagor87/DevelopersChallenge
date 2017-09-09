@@ -5,4 +5,5 @@ export interface Match {
   roundId: number;
   teamA: Team;
   teamB: Team;
+  winnerId: number;
 }

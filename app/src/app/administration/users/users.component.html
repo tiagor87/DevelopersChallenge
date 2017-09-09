@@ -6,21 +6,33 @@
         <th>Name</th>
         <th>Email</th>
         <th>
-          <button type="button" class="btn btn-default">New</button>
+          <button type="button" class="btn btn-default" (click)="new()">New</button>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>
-          <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/17241-200.png" alt="" class="profile-image">
-        </td>
-        <td>Tiago de Carvalho Resende</td>
-        <td>tiagor87@gmail.com</td>
-        <td>
-          <button type="button" class="btn btn-default">Edit</button>
+      <tr *ngIf="!!editingUser && !editingUser.id">
+        <td colspan="4">
+          <nibo-user-edit [user]="editingUser" (saved)="save(0, $event)"></nibo-user-edit>
         </td>
       </tr>
+      <ng-template ngFor [ngForOf]="users" let-user let-i="index">
+        <tr style="cursor: pointer">
+          <td>
+            {{i + 1}}
+          </td>
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td>
+            <button type="button" class="btn btn-default" (click)="edit(user)">Edit</button>
+          </td>
+        </tr>
+        <tr *ngIf="user.id === editingUser?.id">
+          <td colspan="4">
+            <nibo-user-edit [user]="editingUser" (saved)="save(i, $event)"></nibo-user-edit>
+          </td>
+        </tr>
+      </ng-template>
     </tbody>
   </table>
 </div>

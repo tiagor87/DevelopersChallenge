@@ -1,12 +1,18 @@
+import { SharedModule } from './../shared/shared.module';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SignInComponent } from './sign-in/sign-in.component';
-import { AuthenticationService } from './authentication.service';
 
 @NgModule({
-  imports: [CommonModule, AuthenticationRoutingModule],
+  imports: [
+    CommonModule,
+    AuthenticationRoutingModule,
+    SharedModule,
+    FormsModule
+  ],
   declarations: [SignInComponent],
-  providers: [AuthenticationService]
+  providers: []
 })
 export class AuthenticationModule {}

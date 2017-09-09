@@ -12,12 +12,13 @@
     <div class="collapse navbar-collapse" id="menu">
       <ul class="nav navbar-nav">
         <li routerLinkActive="active"><a routerLink="/rounds">Rounds</a></li>
-        <li routerLinkActive="active"><a routerLink="/teams">Teams</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li routerLinkActive="active"><a routerLink="/admin">Admin</a></li>
-        <li routerLinkActive="active"><a routerLink="/signIn">Sign in</a></li>
-        <li routerLinkActive="active"><a>Sign out</a></li>
+        <li *ngIf="!auth; else admin" routerLinkActive="active"><a routerLink="/signIn">Sign in</a></li>
+        <ng-template #admin>
+          <li routerLinkActive="active"><a routerLink="/admin">Admin</a></li>
+          <li><a style="cursor: pointer" (click)="signOut()">Sign out</a></li>
+        </ng-template>
       </ul>
     </div>
   </div>

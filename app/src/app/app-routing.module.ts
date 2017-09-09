@@ -24,10 +24,6 @@ const routes: Routes = [
         component: MatchesComponent
       }
     ]
-  },
-  {
-    path: 'teams',
-    component: TeamsComponent
   }
 ];
 

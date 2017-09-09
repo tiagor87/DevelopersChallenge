@@ -15,7 +15,8 @@ export class MatchService {
       teamB: {
         id: 2,
         name: 'Team B'
-      }
+      },
+      winnerId: 1
     },
     {
       id: 2,
@@ -27,7 +28,8 @@ export class MatchService {
       teamB: {
         id: 4,
         name: 'Team D'
-      }
+      },
+      winnerId: 4
     },
     {
       id: 3,
@@ -39,7 +41,8 @@ export class MatchService {
       teamB: {
         id: 4,
         name: 'Team D'
-      }
+      },
+      winnerId: 1
     }
   ];
   winner: {
@@ -50,8 +53,6 @@ export class MatchService {
 
   public getMatchesByRoundId(roundId: number) {
     return Observable.create(o => {
-      console.log(roundId);
-      console.log(this.matches.filter(m => m.roundId === roundId));
       o.next(this.matches.filter(m => m.roundId === roundId).slice());
       o.complete();
     });

@@ -1,1 +1,12 @@
-{{matches | json}}
+<ul class="list-group">
+  <ng-template ngFor [ngForOf]="matches" let-match let-i="index">
+    <li class="list-group-item list-group-item-info">Match {{i + 1}}</li>
+    <li class="list-group-item" [ngClass]="{disabled: !!match.winnerId && match.winnerId !== match.teamA.id}">
+      {{match.teamA.name}}
+    </li>
+    <li class="list-group-item" [ngClass]="{disabled: !!match.winnerId && match.winnerId !== match.teamB.id}">
+      {{match.teamB.name}}
+    </li>
+  </ng-template>
+
+</ul>

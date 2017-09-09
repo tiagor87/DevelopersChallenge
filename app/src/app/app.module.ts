@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { MatchesComponent } from './matches/matches.component';
-import { TeamsComponent } from './teams/teams.component';
 import { RoundsComponent } from './rounds/rounds.component';
 import { WinnerComponent } from './winner/winner.component';
 
@@ -19,7 +18,6 @@ import { WinnerComponent } from './winner/winner.component';
     HomeComponent,
     HeaderComponent,
     MatchesComponent,
-    TeamsComponent,
     RoundsComponent,
     WinnerComponent
   ],
