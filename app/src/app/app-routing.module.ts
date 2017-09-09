@@ -1,3 +1,5 @@
+import { WinnerComponent } from './winner/winner.component';
+import { RoundsComponent } from './rounds/rounds.component';
 import { TeamsComponent } from './teams/teams.component';
 import { MatchesComponent } from './matches/matches.component';
 import { HomeComponent } from './home/home.component';
@@ -10,8 +12,18 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'matches',
-    component: MatchesComponent
+    path: 'rounds',
+    component: RoundsComponent,
+    children: [
+      {
+        path: 'winner',
+        component: WinnerComponent
+      },
+      {
+        path: ':id',
+        component: MatchesComponent
+      }
+    ]
   },
   {
     path: 'teams',
