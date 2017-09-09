@@ -1,6 +1,5 @@
 import { WinnerComponent } from './winner/winner.component';
 import { RoundsComponent } from './rounds/rounds.component';
-import { TeamsComponent } from './teams/teams.component';
 import { MatchesComponent } from './matches/matches.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';

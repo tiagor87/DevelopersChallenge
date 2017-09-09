@@ -1,3 +1,4 @@
+import { Team } from './team.model';
 import { Observable } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 
@@ -35,5 +36,27 @@ export class TeamService {
       o.next(Object.assign({}, this.teams[id - 1]));
       o.complete();
     });
+  }
+
+  getWinner() {
+    return this.getById(1);
+  }
+
+  save(team: Team) {
+    if (!team.id) {
+      this.teams.push(team);
+      return Observable.create(o => {
+        o.next(team);
+        team.id = this.teams.length;
+        o.complete();
+      });
+    } else {
+      const i = this.teams.findIndex(t => t.id === team.id);
+      this.teams.splice(i, 1, team);
+      return Observable.create(o => {
+        o.next(team);
+        o.complete();
+      });
+    }
   }
 }

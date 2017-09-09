@@ -14,7 +14,7 @@ export class RoundsComponent implements OnInit {
 
   ngOnInit() {
     this.roundService
-      .getRounds()
+      .getAll()
       .subscribe(rounds => (this.rounds = rounds), error => console.log(error));
   }
 }

@@ -45,10 +45,6 @@ export class MatchService {
       winnerId: 1
     }
   ];
-  winner: {
-    id: 1;
-    name: 'Team A';
-  };
   constructor() {}
 
   public getMatchesByRoundId(roundId: number) {

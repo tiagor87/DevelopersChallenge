@@ -16,14 +16,12 @@ export class WinnerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      this.loadTeam(+params['id']);
-    });
+    this.loadTeam();
   }
 
-  private loadTeam(id: number) {
+  private loadTeam() {
     this.teamService
-      .getById(id)
+      .getWinner()
       .subscribe(team => (this.team = team), error => console.log(error));
   }
 }

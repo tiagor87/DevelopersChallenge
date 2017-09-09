@@ -1,3 +1,4 @@
+import { RoundsComponent } from './rounds/rounds.component';
 import { AdministrationComponent } from './administration.component';
 import { TeamsComponent } from './teams/teams.component';
 import { UsersComponent } from './users/users.component';
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'teams',
         component: TeamsComponent
+      },
+      {
+        path: 'rounds',
+        component: RoundsComponent
       }
     ]
   }

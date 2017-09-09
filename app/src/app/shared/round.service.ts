@@ -16,10 +16,28 @@ export class RoundService {
   ];
   constructor() {}
 
-  public getRounds() {
+  public getAll() {
     return Observable.create(o => {
       o.next(this.rounds.slice());
       o.complete();
     });
+  }
+
+  save(round: Round) {
+    if (!round.id) {
+      this.rounds.push(round);
+      return Observable.create(o => {
+        o.next(round);
+        round.id = this.rounds.length;
+        o.complete();
+      });
+    } else {
+      const i = this.rounds.findIndex(r => r.id === round.id);
+      this.rounds.splice(i, 1, round);
+      return Observable.create(o => {
+        o.next(round);
+        o.complete();
+      });
+    }
   }
 }

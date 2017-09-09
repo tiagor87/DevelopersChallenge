@@ -10,24 +10,24 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngIf="!!editingTeam && !editingTeam.id">
+      <tr *ngIf="!!editingRound && !editingRound.id">
         <td colspan="3">
-          <nibo-team-edit [team]="editingTeam" (saved)="save(0, $event)"></nibo-team-edit>
+          <nibo-round-edit [round]="editingRound" (saved)="save(0, $event)"></nibo-round-edit>
         </td>
       </tr>
-      <ng-template ngFor [ngForOf]="teams" let-team let-i="index">
+      <ng-template ngFor [ngForOf]="rounds" let-round let-i="index">
         <tr style="cursor: pointer">
           <td>
             {{i + 1}}
           </td>
-          <td>{{team.name}}</td>
+          <td>{{round.name}}</td>
           <td class="text-right">
-            <button type="button" class="btn btn-default" (click)="edit(team)">Edit</button>
+            <button type="button" class="btn btn-default" (click)="edit(round)">Edit</button>
           </td>
         </tr>
-        <tr *ngIf="team.id === editingTeam?.id">
+        <tr *ngIf="round.id === editingRound?.id">
           <td colspan="3">
-            <nibo-team-edit [team]="editingTeam" (saved)="save(i, $event)"></nibo-team-edit>
+            <nibo-round-edit [round]="editingRound" (saved)="save(i, $event)"></nibo-round-edit>
           </td>
         </tr>
       </ng-template>

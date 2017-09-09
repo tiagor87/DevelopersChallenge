@@ -5,7 +5,9 @@
         <li routerLinkActive="active" *ngFor="let round of rounds">
           <a [routerLink]="[round.id]">{{round.name}}</a>
         </li>
-        <li routerLinkActive="active"><a routerLink="winner">Winner</a></li>
+        <li routerLinkActive="active">
+          <a routerLink="winner">Winner</a>
+        </li>
       </ul>
     </div>
   </div>
