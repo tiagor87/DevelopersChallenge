@@ -12,6 +12,12 @@ namespace Api.Infrastructure.Providers.Memory
         Email = "tiagor87@gmail.com",
         Name = "Tiago Resende",
         Password = "123456"
+      },
+      new User {
+        Id = 2,
+        Email = "dev@nibo.com.br",
+        Name = "Developer Nibo",
+        Password = "123456"
       }
     };
 
