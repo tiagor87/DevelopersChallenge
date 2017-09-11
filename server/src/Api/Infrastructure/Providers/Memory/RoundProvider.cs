@@ -30,5 +30,15 @@ namespace Api.Infrastructure.Providers.Memory
     {
       return rounds.FirstOrDefault(r => r.InProgress);
     }
+
+    public Round GetById(long id)
+    {
+      return rounds.FirstOrDefault(r => r.Id.Equals(id));
+    }
+
+    public void DeleteAll()
+    {
+      rounds.Clear();
+    }
   }
 }

@@ -30,11 +30,11 @@ export class TeamsComponent implements OnInit {
     this.teamService.save(team).subscribe(
       t => {
         if (!!team.id) {
-          this.teams.splice(i, 1, t);
+          Object.assign(this.teams[i], t);
         } else {
           this.teams.push(t);
+          this.editingTeam = t;
         }
-        this.editingTeam = null;
       },
       error => console.log(error)
     );

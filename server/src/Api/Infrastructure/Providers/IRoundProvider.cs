@@ -12,5 +12,9 @@ namespace Api.Infrastructure.Providers
     Round Add(Round round);
 
     void Edit(Round round);
+
+    void DeleteAll();
+
+    Round GetById(long id);
   }
 }

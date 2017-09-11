@@ -38,5 +38,15 @@ namespace Api.Infrastructure.Repositories
     {
       return this.provider.GetInProgress();
     }
+
+    public void DeleteAll()
+    {
+      this.provider.DeleteAll();
+    }
+
+    public Round GetById(long id)
+    {
+      return this.provider.GetById(id);
+    }
   }
 }

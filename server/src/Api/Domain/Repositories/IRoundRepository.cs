@@ -12,5 +12,9 @@ namespace Api.Domain.Repositories
     void Edit(Round round);
 
     Round GetInProgress();
+
+    void DeleteAll();
+
+    Round GetById(long id);
   }
 }

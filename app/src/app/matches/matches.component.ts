@@ -1,4 +1,4 @@
-import { MatchService } from './../shared/match.service';
+import { RoundService } from './../shared/round.service';
 import { Match } from './../shared/match.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Rx';
@@ -13,22 +13,22 @@ export class MatchesComponent implements OnInit, OnDestroy {
   matches: Array<Match>;
   constructor(
     private activatedRoute: ActivatedRoute,
-    private matchService: MatchService
+    private roundService: RoundService
   ) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-      this.loadMatches(+params['id']);
+      this.loadRound(+params['id']);
     });
   }
 
   ngOnDestroy() {}
 
-  private loadMatches(roundId: number) {
-    this.matchService
-      .getMatchesByRoundId(roundId)
+  private loadRound(id: number) {
+    this.roundService
+      .getById(id)
       .subscribe(
-        matches => (this.matches = matches),
+        round => (this.matches = round.matches),
         error => console.log(error)
       );
   }

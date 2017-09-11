@@ -24,18 +24,47 @@ namespace Api.Domain.Services
       }
 
       var teams = this.teamService.GetNotEliminated();
+      if (teams.Count.Equals(1))
+      {
+        return null;
+      }
+      var rounds = this.repository.GetAll();
       var round = new Round(teams);
+      round.Name = string.Format("Round {0}", rounds.Count + 1);
       return this.repository.Add(round);
     }
 
     public void Edit(Round round)
     {
+      round.Matches.ForEach(m =>
+      {
+        m.Teams.ForEach(t =>
+        {
+          this.teamService.Edit(t);
+        });
+      });
       this.repository.Edit(round);
+    }
+
+    public void ClearRounds()
+    {
+      this.repository.DeleteAll();
+      var teams = this.teamService.GetAll();
+      teams.ForEach(t =>
+      {
+        t.Eliminated = false;
+        this.teamService.Edit(t);
+      });
     }
 
     public List<Round> GetAll()
     {
       return this.repository.GetAll();
+    }
+
+    public Round GetById(long id)
+    {
+      return this.repository.GetById(id);
     }
   }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Api.Domain.Models
 {
@@ -10,5 +11,13 @@ namespace Api.Domain.Models
     }
 
     public List<Team> Teams { get; set; }
+
+    public bool InProgress
+    {
+      get
+      {
+        return !this.Teams.Any(t => t.Eliminated);
+      }
+    }
   }
 }

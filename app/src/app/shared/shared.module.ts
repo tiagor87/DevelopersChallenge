@@ -4,7 +4,6 @@ import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { UserService } from './user.service';
 import { TeamService } from './team.service';
-import { MatchService } from './match.service';
 import { RoundService } from './round.service';
 import { BooleanPipe } from './boolean.pipe';
 
@@ -12,12 +11,6 @@ import { BooleanPipe } from './boolean.pipe';
   imports: [CommonModule, HttpModule],
   declarations: [BooleanPipe],
   exports: [BooleanPipe],
-  providers: [
-    UserService,
-    TeamService,
-    MatchService,
-    RoundService,
-    AuthenticationService
-  ]
+  providers: [UserService, TeamService, RoundService, AuthenticationService]
 })
 export class SharedModule {}

@@ -10,7 +10,6 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { TeamEditComponent } from './team-edit/team-edit.component';
 import { RoundsComponent } from './rounds/rounds.component';
 import { RoundEditComponent } from './round-edit/round-edit.component';
-import { MatchEditComponent } from './match-edit/match-edit.component';
 
 @NgModule({
   imports: [
@@ -26,8 +25,7 @@ import { MatchEditComponent } from './match-edit/match-edit.component';
     UserEditComponent,
     TeamEditComponent,
     RoundsComponent,
-    RoundEditComponent,
-    MatchEditComponent
+    RoundEditComponent
   ]
 })
 export class AdministrationModule {}

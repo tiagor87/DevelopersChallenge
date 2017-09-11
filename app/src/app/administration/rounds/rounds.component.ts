@@ -19,7 +19,20 @@ export class RoundsComponent implements OnInit {
   }
 
   new() {
-    this.editingRound = { id: 0, name: '' };
+    this.roundService.new().subscribe(
+      round => {
+        if (!round) {
+          return;
+        }
+        const i = this.rounds.findIndex(r => r.id === round.id);
+        if (i > -1) {
+          this.rounds.splice(i, 1, round);
+        } else {
+          this.rounds.push(round);
+        }
+      },
+      error => console.log(error)
+    );
   }
 
   edit(round: Round) {
@@ -28,15 +41,19 @@ export class RoundsComponent implements OnInit {
 
   save(i: number, round: Round) {
     this.roundService.save(round).subscribe(
-      t => {
-        if (!!round.id) {
-          this.rounds.splice(i, 1, t);
-        } else {
-          this.rounds.push(t);
+      () => {
+        Object.assign(this.rounds[i], round);
+        if (!round.inProgress) {
+          this.new();
         }
-        this.editingRound = null;
       },
       error => console.log(error)
     );
+  }
+
+  clear() {
+    this.roundService
+      .deleteAll()
+      .subscribe(() => (this.rounds = []), error => console.log(error));
   }
 }

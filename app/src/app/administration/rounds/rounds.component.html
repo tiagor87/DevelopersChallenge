@@ -4,14 +4,17 @@
       <tr>
         <th></th>
         <th>Name</th>
+        <th>In Progress</th>
+        <th>Matches</th>
         <th class="text-right">
           <button type="button" class="btn btn-default" (click)="new()">New</button>
+          <button class="btn btn-danger" (click)="clear()">Clear all</button>
         </th>
       </tr>
     </thead>
     <tbody>
       <tr *ngIf="!!editingRound && !editingRound.id">
-        <td colspan="3">
+        <td colspan="5">
           <nibo-round-edit [round]="editingRound" (saved)="save(0, $event)"></nibo-round-edit>
         </td>
       </tr>
@@ -21,12 +24,14 @@
             {{i + 1}}
           </td>
           <td>{{round.name}}</td>
+          <td>{{round.inProgress | boolean}}</td>
+          <td>{{round.matches.length}} matche(s)</td>
           <td class="text-right">
             <button type="button" class="btn btn-default" (click)="edit(round)">Edit</button>
           </td>
         </tr>
         <tr *ngIf="round.id === editingRound?.id">
-          <td colspan="3">
+          <td colspan="5">
             <nibo-round-edit [round]="editingRound" (saved)="save(i, $event)"></nibo-round-edit>
           </td>
         </tr>

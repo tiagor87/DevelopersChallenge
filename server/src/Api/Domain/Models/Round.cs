@@ -11,7 +11,15 @@ namespace Api.Domain.Models
       this.CreateMatches(teams);
     }
 
+    // Empty create constructor for JSON to model
+    public Round()
+    {
+
+    }
+
     public long Id { get; set; }
+
+    public string Name { get; set; }
 
     public List<Match> Matches { get; set; }
 

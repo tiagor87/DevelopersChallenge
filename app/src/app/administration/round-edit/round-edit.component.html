@@ -1,46 +1,29 @@
 <form #form="ngForm">
-  <input type="hidden" name="id" ngModel>
   <div class="form-group">
-    <label for="name">Name</label>
+    <label for="name">
+      Name
+    </label>
     <input type="text" class="form-control" id="name" name="name" ngModel>
   </div>
   <ul class="list-group">
-    <ng-template ngFor [ngForOf]="matches" let-match let-i="index">
+    <ng-template ngFor [ngForOf]="round.matches" let-match let-i="index">
       <li class="list-group-item list-group-item-info">Match {{i + 1}}</li>
-      <li class="list-group-item">
-        <div class="row">
-          <div class="col-xs-6">
-
-            <div class="form-group">
-              <label for="teamA-select">Team A</label>
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <input type="radio" name="winner_{{i}}" [value]="match.teamA.id" (change)="match.winnerId = match.teamA.id" [checked]="match.winnerId == match.teamA.id">
-                </span>
-                <select name="teamA" [value]="match.teamA.id" class="form-control" id="teamA-select" (change)="setTeamA(match, $event.target.value)">
-                  <option *ngFor="let team of teams" [value]="team.id">{{team.name}}</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-6">
-            <div class="form-group">
-              <label for="teamB-select">Team B</label>
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <input type="radio" name="winner_{{i}}" [value]="match.teamB.id" (change)="match.winnerId = match.teamB.id" [checked]="match.winnerId == match.teamB.id">
-                </span>
-                <select name="teamB" [value]="match.teamB.id" class="form-control" id="teamB-select" (change)="setTeamB(match, $event.target.value)">
-                  <option *ngFor="let team of teams" [value]="team.id">{{team.name}}</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
+      <li class="list-group-item" [ngClass]="{disabled: match.teams[0].eliminated}">
+        <a style="cursor: pointer" class="row">
+          <span class="col-xs-9 col-sm-10 col-md-10 col-lg-11" [ngClass]="{'col-xs-12 col-sm-12 col-md-12': !match.inProgress}">{{match.teams[0].name}}</span>
+          <span class="col-xs-3 col-sm-2 col-md-2 col-lg-1 text-right" *ngIf="match.inProgress">
+            <button class="btn btn-danger" (click)="eliminate(match, match.teams[0])">Eliminate</button>
+          </span>
+        </a>
+      </li>
+      <li class="list-group-item" [ngClass]="{disabled: match.teams[1].eliminated}">
+        <a style="cursor: pointer" class="row">
+          <span class="col-xs-9 col-sm-10 col-md-10 col-lg-11" [ngClass]="{'col-xs-12 col-sm-12 col-md-12': !match.inProgress}">{{match.teams[1].name}}</span>
+          <span class="col-xs-3 col-sm-2 col-md-2 col-lg-1 text-right" *ngIf="match.inProgress">
+            <button class="btn btn-danger" (click)="eliminate(match, match.teams[1])">Eliminate</button>
+          </span>
+        </a>
       </li>
     </ng-template>
   </ul>
-  <div class="text-center">
-    <button class="btn btn-success">Save</button>
-  </div>
 </form>

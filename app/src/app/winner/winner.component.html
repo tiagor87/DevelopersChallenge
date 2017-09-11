@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+  <div *ngIf="!!team; else inProgress" class="col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
     <div class="thumbnail">
       <img src="http://gainingtactics.com/wp-content/uploads/2016/06/being-a-champion2-2z4t9h8ulcxou07g6h87be.png" alt="">
       <div class="caption">
@@ -8,4 +8,11 @@
       </div>
     </div>
   </div>
+  <ng-template #inProgress>
+    <div class="col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+      <div class="alert alert-info text-center">
+        Championship in progress
+      </div>
+    </div>
+  </ng-template>
 </div>

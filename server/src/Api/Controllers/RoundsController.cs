@@ -17,12 +17,25 @@ namespace Api.Controllers
     }
 
     [HttpGet]
-    public ObjectResult GetAll()
+    public IActionResult GetAll()
     {
       try
       {
         var rounds = this.service.GetAll();
-        return StatusCode(200, Json(rounds));
+        return StatusCode(200, rounds);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e);
+      }
+    }
+
+    [HttpGet("{id}")]
+    public IActionResult GetById(long id)
+    {
+      try
+      {
+        return StatusCode(200, this.service.GetById(id));
       }
       catch (Exception e)
       {
@@ -31,12 +44,12 @@ namespace Api.Controllers
     }
 
     [HttpPut("{id}")]
-    public ObjectResult Put(long id, [FromBody]Round round)
+    public IActionResult Put(long id, [FromBody]Round round)
     {
       try
       {
         this.service.Edit(round);
-        return StatusCode(200, Json(null));
+        return StatusCode(200, null);
       }
       catch (Exception e)
       {
@@ -45,12 +58,30 @@ namespace Api.Controllers
     }
 
     [HttpPost]
-    public ObjectResult Post()
+    public IActionResult Post()
     {
       try
       {
         var round = this.service.CreateRound();
-        return StatusCode(201, Json(round));
+        if (round == null)
+        {
+          return StatusCode(204, null);
+        }
+        return StatusCode(201, round);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e);
+      }
+    }
+
+    [HttpDelete]
+    public IActionResult DeleteAll()
+    {
+      try
+      {
+        this.service.ClearRounds();
+        return StatusCode(204, null);
       }
       catch (Exception e)
       {

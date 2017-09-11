@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs/Rx';
 import { NgForm } from '@angular/forms';
 import { Team } from './../../shared/team.model';
 import {
@@ -6,7 +7,8 @@ import {
   Input,
   EventEmitter,
   Output,
-  ViewChild
+  ViewChild,
+  OnDestroy
 } from '@angular/core';
 
 @Component({
@@ -14,17 +16,23 @@ import {
   templateUrl: './team-edit.component.html',
   styleUrls: ['./team-edit.component.scss']
 })
-export class TeamEditComponent implements OnInit {
+export class TeamEditComponent implements OnInit, OnDestroy {
   @Input() team: Team;
   @Output() saved = new EventEmitter<Team>();
   @ViewChild('form') form: NgForm;
+  private subscription: Subscription;
   constructor() {}
 
   ngOnInit() {
-    setTimeout(() => this.form.setValue(this.team));
+    setTimeout(() => {
+      this.form.setValue(this.team);
+      this.subscription = this.form.valueChanges
+        .debounceTime(400)
+        .subscribe(value => this.saved.emit(value));
+    });
   }
 
-  save(form: NgForm) {
-    this.saved.emit(this.form.value);
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

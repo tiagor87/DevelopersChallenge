@@ -36,20 +36,6 @@ namespace Api.Controllers
       }
     }
 
-    [HttpGet("{id}")]
-    public IActionResult GetById(long id)
-    {
-      try
-      {
-        var team = this.service.GetById(id);
-        return StatusCode(200, team);
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e);
-      }
-    }
-
     [HttpGet]
     public IActionResult GetAll()
     {

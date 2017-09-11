@@ -13,12 +13,6 @@ export class TeamService {
     return this.http.get(`${this.endpoint}`).map(response => response.json());
   }
 
-  getById(id: number) {
-    return this.http
-      .get(`${this.endpoint}/id`)
-      .map(response => response.json());
-  }
-
   getWinner() {
     return this.http
       .get(`${this.endpoint}/winner`)
