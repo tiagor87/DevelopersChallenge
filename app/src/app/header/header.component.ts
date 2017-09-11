@@ -1,6 +1,5 @@
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { AuthenticationResponse } from './../shared/authentication-response.model';
 import { AuthenticationService } from './../shared/authentication.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
@@ -11,7 +10,7 @@ import { Subject } from 'rxjs/Subject';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  auth: AuthenticationResponse;
+  auth: any;
   private authSubscription: Subscription;
   constructor(
     private authentionService: AuthenticationService,

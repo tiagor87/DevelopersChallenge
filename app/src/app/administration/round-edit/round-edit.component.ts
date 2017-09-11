@@ -1,7 +1,6 @@
 import { Subscription } from 'rxjs/Rx';
 import { Team } from './../../shared/team.model';
 import { TeamService } from './../../shared/team.service';
-import { MatchService } from './../../shared/match.service';
 import { NgForm } from '@angular/forms';
 import { Round } from './../../shared/round.model';
 import {

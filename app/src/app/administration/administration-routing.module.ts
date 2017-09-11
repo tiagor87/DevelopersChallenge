@@ -1,3 +1,4 @@
+import { AuthenticationGuard } from './../shared/authentication.guard';
 import { RoundsComponent } from './rounds/rounds.component';
 import { AdministrationComponent } from './administration.component';
 import { TeamsComponent } from './teams/teams.component';
@@ -9,6 +10,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdministrationComponent,
+    canActivate: [AuthenticationGuard],
     children: [
       {
         path: 'users',
