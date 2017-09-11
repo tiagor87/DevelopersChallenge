@@ -15,7 +15,7 @@ namespace Api.Domain.Services
       this.teamService = teamService;
     }
 
-    public Round createRound()
+    public Round CreateRound()
     {
       var roundInProgress = this.repository.GetInProgress();
       if (roundInProgress != null)
@@ -26,6 +26,11 @@ namespace Api.Domain.Services
       var teams = this.teamService.GetNotEliminated();
       var round = new Round(teams);
       return this.repository.Add(round);
+    }
+
+    public void Edit(Round round)
+    {
+      this.repository.Edit(round);
     }
 
     public List<Round> GetAll()

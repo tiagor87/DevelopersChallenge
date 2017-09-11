@@ -4,6 +4,7 @@
       <tr>
         <th></th>
         <th>Name</th>
+        <th>Eliminated</th>
         <th class="text-right">
           <button type="button" class="btn btn-default" (click)="new()">New</button>
         </th>
@@ -11,7 +12,7 @@
     </thead>
     <tbody>
       <tr *ngIf="!!editingTeam && !editingTeam.id">
-        <td colspan="3">
+        <td colspan="4">
           <nibo-team-edit [team]="editingTeam" (saved)="save(0, $event)"></nibo-team-edit>
         </td>
       </tr>
@@ -21,12 +22,15 @@
             {{i + 1}}
           </td>
           <td>{{team.name}}</td>
+          <td>
+            {{team.eliminated | boolean}}
+          </td>
           <td class="text-right">
             <button type="button" class="btn btn-default" (click)="edit(team)">Edit</button>
           </td>
         </tr>
         <tr *ngIf="team.id === editingTeam?.id">
-          <td colspan="3">
+          <td colspan="4">
             <nibo-team-edit [team]="editingTeam" (saved)="save(i, $event)"></nibo-team-edit>
           </td>
         </tr>

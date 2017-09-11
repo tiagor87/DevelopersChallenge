@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Api.Domain.Models;
 using Api.Domain.Repositories;
 using Api.Infrastructure.Providers;
+using Api.Infrastructure.Providers.Memory;
 
 namespace Api.Infrastructure.Repositories
 {
@@ -11,6 +12,11 @@ namespace Api.Infrastructure.Repositories
     public RoundRepository(IRoundProvider provider)
     {
       this.provider = provider;
+    }
+
+    public RoundRepository()
+    {
+      this.provider = new RoundProvider();
     }
 
     public Round Add(Round round)

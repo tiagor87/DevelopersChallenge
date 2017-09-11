@@ -21,12 +21,12 @@ namespace Api.Controllers
 
     // GET api/values
     [HttpGet]
-    public ObjectResult Get()
+    public IActionResult Get()
     {
       try
       {
         var users = this.service.GetAll();
-        return Ok(Json(users));
+        return StatusCode(200, users);
       }
       catch (Exception e)
       {
@@ -36,11 +36,11 @@ namespace Api.Controllers
 
     // POST api/values
     [HttpPost]
-    public ObjectResult Post([FromBody]User user)
+    public IActionResult Post([FromBody]User user)
     {
       try
       {
-        return StatusCode(201, Json(this.service.Add(user)));
+        return StatusCode(201, this.service.Add(user));
       }
       catch (Exception e)
       {
@@ -50,12 +50,12 @@ namespace Api.Controllers
 
     // PUT api/values/5
     [HttpPut("{id}")]
-    public ObjectResult Put(int id, [FromBody]User user)
+    public IActionResult Put(int id, [FromBody]User user)
     {
       try
       {
         this.service.Edit(user);
-        return Ok(null);
+        return StatusCode(200, null);
       }
       catch (Exception e)
       {
@@ -65,7 +65,7 @@ namespace Api.Controllers
 
     // DELETE api/values/5
     [HttpDelete("{id}")]
-    public ObjectResult Delete(int id)
+    public IActionResult Delete(int id)
     {
       try
       {

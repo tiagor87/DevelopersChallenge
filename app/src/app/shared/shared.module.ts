@@ -1,14 +1,17 @@
 import { AuthenticationService } from './authentication.service';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { UserService } from './user.service';
 import { TeamService } from './team.service';
 import { MatchService } from './match.service';
 import { RoundService } from './round.service';
+import { BooleanPipe } from './boolean.pipe';
 
 @NgModule({
-  imports: [CommonModule],
-  declarations: [],
+  imports: [CommonModule, HttpModule],
+  declarations: [BooleanPipe],
+  exports: [BooleanPipe],
   providers: [
     UserService,
     TeamService,

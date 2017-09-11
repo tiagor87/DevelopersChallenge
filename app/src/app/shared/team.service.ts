@@ -1,62 +1,39 @@
+import { Http } from '@angular/http';
 import { Team } from './team.model';
 import { Observable } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class TeamService {
-  private teams = [
-    {
-      id: 1,
-      name: 'Team A'
-    },
-    {
-      id: 2,
-      name: 'Team B'
-    },
-    {
-      id: 3,
-      name: 'Team C'
-    },
-    {
-      id: 4,
-      name: 'Team D'
-    }
-  ];
-  constructor() {}
+  private endpoint = `${environment.api}/teams`;
+  constructor(private http: Http) {}
 
   getAll() {
-    return Observable.create(o => {
-      o.next(this.teams.slice());
-      o.complete();
-    });
+    return this.http.get(`${this.endpoint}`).map(response => response.json());
   }
 
   getById(id: number) {
-    return Observable.create(o => {
-      o.next(Object.assign({}, this.teams[id - 1]));
-      o.complete();
-    });
+    return this.http
+      .get(`${this.endpoint}/id`)
+      .map(response => response.json());
   }
 
   getWinner() {
-    return this.getById(1);
+    return this.http
+      .get(`${this.endpoint}/winner`)
+      .map(response => response.json());
   }
 
   save(team: Team) {
     if (!team.id) {
-      this.teams.push(team);
-      return Observable.create(o => {
-        o.next(team);
-        team.id = this.teams.length;
-        o.complete();
-      });
+      return this.http
+        .post(this.endpoint, team)
+        .map(response => response.json());
     } else {
-      const i = this.teams.findIndex(t => t.id === team.id);
-      this.teams.splice(i, 1, team);
-      return Observable.create(o => {
-        o.next(team);
-        o.complete();
-      });
+      return this.http
+        .put(`${this.endpoint}/${team.id}`, team)
+        .map(response => team);
     }
   }
 }

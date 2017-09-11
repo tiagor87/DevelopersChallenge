@@ -1,47 +1,25 @@
+import { environment } from './../../environments/environment';
 import { User } from './user.model';
 import { Observable } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 
 @Injectable()
 export class UserService {
-  private users = [
-    {
-      id: 1,
-      name: 'Tiago Resende',
-      email: 'tiagor87@gmail.com',
-      password: ''
-    },
-    {
-      id: 2,
-      name: 'Nibo',
-      email: 'dev@nibo.com.br',
-      password: ''
-    }
-  ];
-  constructor() {}
+  private endpoint = `${environment.api}/users`;
+  constructor(private http: Http) {}
 
   getAll() {
-    return Observable.create(o => {
-      o.next(this.users.slice());
-      o.complete();
-    });
+    return this.http.get(this.endpoint).map(response => response.json());
   }
 
   save(user: User) {
     if (!user.id) {
-      this.users.push(user);
-      return Observable.create(o => {
-        o.next(user);
-        user.id = this.users.length;
-        o.complete();
-      });
+      return this.http
+        .post(this.endpoint, user)
+        .map(response => response.json());
     } else {
-      const i = this.users.findIndex(u => u.id === user.id);
-      this.users.splice(i, 1, user);
-      return Observable.create(o => {
-        o.next(user);
-        o.complete();
-      });
+      return this.http.put(`${this.endpoint}/${user.id}`, user).map(() => user);
     }
   }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Api.Domain.Models;
 using Api.Domain.Services;
 using Api.Infrastructure.Repositories;
@@ -17,13 +18,31 @@ namespace Api.Controllers
       this.service = new TeamService(new TeamRepository());
     }
 
+    [HttpGet("winner")]
+    public IActionResult GetWinner()
+    {
+      try
+      {
+        var teams = this.service.GetNotEliminated();
+        if (teams.Count == 1)
+        {
+          return StatusCode(200, teams.First());
+        }
+        return StatusCode(404, null);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e);
+      }
+    }
+
     [HttpGet("{id}")]
-    public ObjectResult GetById(long id)
+    public IActionResult GetById(long id)
     {
       try
       {
         var team = this.service.GetById(id);
-        return Ok(Json(team));
+        return StatusCode(200, team);
       }
       catch (Exception e)
       {
@@ -32,12 +51,12 @@ namespace Api.Controllers
     }
 
     [HttpGet]
-    public ObjectResult Get()
+    public IActionResult GetAll()
     {
       try
       {
         var teams = this.service.GetAll();
-        return Ok(Json(teams));
+        return StatusCode(200, teams);
       }
       catch (Exception e)
       {
@@ -47,11 +66,11 @@ namespace Api.Controllers
 
     // POST api/values
     [HttpPost]
-    public ObjectResult Post([FromBody]Team team)
+    public IActionResult Post([FromBody]Team team)
     {
       try
       {
-        return StatusCode(201, Json(this.service.Add(team)));
+        return StatusCode(201, this.service.Add(team));
       }
       catch (Exception e)
       {
@@ -61,12 +80,12 @@ namespace Api.Controllers
 
     // PUT api/values/5
     [HttpPut("{id}")]
-    public ObjectResult Put(int id, [FromBody]Team team)
+    public IActionResult Put(int id, [FromBody]Team team)
     {
       try
       {
         this.service.Edit(team);
-        return Ok(null);
+        return StatusCode(200, null);
       }
       catch (Exception e)
       {
@@ -76,7 +95,7 @@ namespace Api.Controllers
 
     // DELETE api/values/5
     [HttpDelete("{id}")]
-    public ObjectResult Delete(int id)
+    public IActionResult Delete(int id)
     {
       try
       {

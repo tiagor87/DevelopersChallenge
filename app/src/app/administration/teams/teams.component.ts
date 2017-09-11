@@ -19,7 +19,7 @@ export class TeamsComponent implements OnInit {
   }
 
   new() {
-    this.editingTeam = { id: 0, name: '' };
+    this.editingTeam = { id: 0, eliminated: false, name: '' };
   }
 
   edit(team: Team) {

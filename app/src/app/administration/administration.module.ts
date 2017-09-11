@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { NgModule } from '@angular/core';
@@ -12,7 +13,12 @@ import { RoundEditComponent } from './round-edit/round-edit.component';
 import { MatchEditComponent } from './match-edit/match-edit.component';
 
 @NgModule({
-  imports: [CommonModule, AdministrationRoutingModule, FormsModule],
+  imports: [
+    CommonModule,
+    AdministrationRoutingModule,
+    SharedModule,
+    FormsModule
+  ],
   declarations: [
     UsersComponent,
     TeamsComponent,
