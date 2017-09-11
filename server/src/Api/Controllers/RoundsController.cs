@@ -2,6 +2,8 @@ using System;
 using Api.Domain.Models;
 using Api.Domain.Services;
 using Api.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -43,6 +45,7 @@ namespace Api.Controllers
       }
     }
 
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [HttpPut("{id}")]
     public IActionResult Put(long id, [FromBody]Round round)
     {
@@ -57,6 +60,7 @@ namespace Api.Controllers
       }
     }
 
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [HttpPost]
     public IActionResult Post()
     {
@@ -75,6 +79,7 @@ namespace Api.Controllers
       }
     }
 
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [HttpDelete]
     public IActionResult DeleteAll()
     {

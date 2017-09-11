@@ -1,20 +1,25 @@
 import { environment } from './../../environments/environment';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Round } from './round.model';
 import { Injectable } from '@angular/core';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class RoundService {
   private endpoint = `${environment.api}/rounds`;
-  constructor(private http: Http) {}
+  constructor(private http: Http, private authenticationService: AuthenticationService) {}
 
   public getAll() {
     return this.http.get(this.endpoint).map(response => response.json());
   }
 
   new() {
-    return this.http.post(this.endpoint, {}).map(response => {
+    return this.http.post(this.endpoint, {}, {
+      headers: new Headers({
+        Authorization: `bearer ${this.authenticationService.getAuth().token}`
+      })
+    }).map(response => {
       if (response.status === 201) {
         return response.json();
       }
@@ -24,7 +29,11 @@ export class RoundService {
 
   save(round: Round) {
     return this.http
-      .put(`${this.endpoint}/${round.id}`, round)
+      .put(`${this.endpoint}/${round.id}`, round, {
+        headers: new Headers({
+          Authorization: `bearer ${this.authenticationService.getAuth().token}`
+        })
+      })
       .map(response => response.json());
   }
 
@@ -35,6 +44,10 @@ export class RoundService {
   }
 
   deleteAll() {
-    return this.http.delete(this.endpoint);
+    return this.http.delete(this.endpoint, {
+      headers: new Headers({
+        Authorization: `bearer ${this.authenticationService.getAuth().token}`
+      })
+    });
   }
 }

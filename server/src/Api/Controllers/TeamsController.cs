@@ -3,7 +3,10 @@ using System.Linq;
 using Api.Domain.Models;
 using Api.Domain.Services;
 using Api.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.HttpSys;
 
 namespace Api.Controllers
 {
@@ -36,6 +39,7 @@ namespace Api.Controllers
       }
     }
 
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [HttpGet]
     public IActionResult GetAll()
     {
@@ -50,7 +54,7 @@ namespace Api.Controllers
       }
     }
 
-    // POST api/values
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [HttpPost]
     public IActionResult Post([FromBody]Team team)
     {
@@ -64,7 +68,7 @@ namespace Api.Controllers
       }
     }
 
-    // PUT api/values/5
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [HttpPut("{id}")]
     public IActionResult Put(int id, [FromBody]Team team)
     {
@@ -79,7 +83,7 @@ namespace Api.Controllers
       }
     }
 
-    // DELETE api/values/5
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {

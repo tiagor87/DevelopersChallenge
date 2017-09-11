@@ -1,30 +1,24 @@
+import { Http } from '@angular/http';
 import { AuthenticationResponse } from './authentication-response.model';
 import { Observable, Subject } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 const AUTH_KEY = 'summoners_rift.auth';
 
 @Injectable()
 export class AuthenticationService {
   private auth: AuthenticationResponse;
-
   authChanged = new Subject<AuthenticationResponse>();
-
-  constructor() {
+  endpoint = `${environment.api}/authentication`;
+  constructor(private http: Http) {
     this.auth = this.getAuthFromStorage();
   }
 
   signIn(email: string, password: string) {
-    return Observable.create(o => {
-      o.next({
-        data: '{"token": "123654789abcdef", "identity":"tiagor87@gmail.com"}',
-        json: function() {
-          return JSON.parse(this.data);
-        }
-      });
-      o.complete();
-    }).map(response => {
-      this.saveAuth(response.data);
+    return this.http.post(this.endpoint, {email: email, password: password})
+    .map(response => {
+      this.saveAuth(response.text());
       this.auth = response.json();
       this.authChanged.next(this.auth);
       return this.auth;
